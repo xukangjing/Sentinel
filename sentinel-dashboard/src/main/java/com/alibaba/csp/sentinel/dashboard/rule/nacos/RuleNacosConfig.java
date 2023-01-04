@@ -25,10 +25,11 @@ public class RuleNacosConfig {
     @Bean
     public ConfigService nacosConfigService() throws Exception {
         Properties properties = new Properties();
-        properties.put(PropertyKeyConst.SERVER_ADDR, "162.14.115.18:8848");
-        // properties.put(PropertyKeyConst.NAMESPACE, "xxx"); 命名科技
-        // properties.put(PropertyKeyConst.USERNAME, "xxx"); 用户名
-        // properties.put(PropertyKeyConst.PASSWORD, "xxx"); 密码
+//        properties.put(PropertyKeyConst.SERVER_ADDR, "162.14.115.18:8848");
+        properties.put(PropertyKeyConst.SERVER_ADDR, "http://dev-nacos.api.xiaomi.net:80");
+         properties.put(PropertyKeyConst.NAMESPACE, "eco_soft");
+         properties.put(PropertyKeyConst.USERNAME, "nacos");
+         properties.put(PropertyKeyConst.PASSWORD, "nacos");
         return ConfigFactory.createConfigService(properties);
     }
 }
