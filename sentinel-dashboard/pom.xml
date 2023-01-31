@@ -10,6 +10,9 @@
     </parent>
 
     <artifactId>sentinel-dashboard</artifactId>
+   <!-- <version>0.0.1-SNAPSHOT</version>
+    <name>sentinel-dashboard</name>
+    <description>sentinel-dashboard</description>-->
     <packaging>jar</packaging>
 
     <properties>

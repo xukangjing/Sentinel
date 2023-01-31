@@ -19,8 +19,8 @@ mvn clean package
 使用如下命令启动编译后的控制台：
 
 ```bash
-java -Dserver.port=8080 \
--Dcsp.sentinel.dashboard.server=localhost:8080 \
+java -Dserver.port=80 \
+-Dcsp.sentinel.dashboard.server=localhost:80 \
 -Dproject.name=sentinel-dashboard \
 -jar target/sentinel-dashboard.jar
 ```
