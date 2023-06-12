@@ -196,7 +196,7 @@ public class DegradeController {
         publishRules(oldEntity.getApp());
         return Result.ofSuccess(id);
     }
-
+//修改推送逻辑
 //    private boolean publishRules(String app, String ip, Integer port) {
 //        List<DegradeRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
 //        return sentinelApiClient.setDegradeRuleOfMachine(app, ip, port, rules);

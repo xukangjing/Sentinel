@@ -84,6 +84,9 @@ public class GatewayFlowRuleController {
         }
 
         try {
+            //修改读取逻辑
+//            List<GatewayFlowRuleEntity> rules = sentinelApiClient.fetchGatewayFlowRules(app, ip, port).get();
+
             String ruleStr = ruleProvider.getRules(RuleNacosConstants.GATEWAY_FLOW_DATA_ID, app);
             List<GatewayFlowRuleEntity> rules = new ArrayList<>();
             if (ruleStr != null) {
@@ -262,6 +265,9 @@ public class GatewayFlowRuleController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishRules(app, ip, port)) {
+//            logger.warn("publish gateway flow rules fail after add");
+//        }
         publishRules(entity.getApp());
 
         return Result.ofSuccess(entity);
@@ -406,6 +412,9 @@ public class GatewayFlowRuleController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishRules(app, entity.getIp(), entity.getPort())) {
+//            logger.warn("publish gateway flow rules fail after update");
+//        }
         publishRules(entity.getApp());
         return Result.ofSuccess(entity);
     }
@@ -431,11 +440,19 @@ public class GatewayFlowRuleController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishRules(oldEntity.getApp(), oldEntity.getIp(), oldEntity.getPort())) {
+//            logger.warn("publish gateway flow rules fail after delete");
+//        }
         publishRules(oldEntity.getApp());
 
         return Result.ofSuccess(id);
     }
 
+    //修改推送逻辑
+//    private boolean publishRules(String app, String ip, Integer port) {
+//        List<GatewayFlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
+//        return sentinelApiClient.modifyGatewayFlowRules(app, ip, port, rules);
+//    }
     private void publishRules(String app) {
         try {
             List<GatewayFlowRuleEntity> rules = repository.findAllByApp(app);

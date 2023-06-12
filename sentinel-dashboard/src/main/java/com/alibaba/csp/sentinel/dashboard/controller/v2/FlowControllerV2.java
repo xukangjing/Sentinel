@@ -84,6 +84,8 @@ public class FlowControllerV2 {
             return Result.ofFail(-1, "app can't be null or empty");
         }
         try {
+            //修改读取逻辑
+            // 修改位置如下：
 //            List<FlowRuleEntity> rules = ruleProvider.getRules(app);
 //            if (rules != null && !rules.isEmpty()) {
 //                for (FlowRuleEntity entity : rules) {
@@ -243,7 +245,7 @@ public class FlowControllerV2 {
         }
         return Result.ofSuccess(id);
     }
-
+//修改推送逻辑
     // 修改位置如下：
 //    private void publishRules(/*@NonNull*/ String app) throws Exception {
 //        List<FlowRuleEntity> rules = repository.findAllByApp(app);

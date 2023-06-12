@@ -98,6 +98,7 @@ public class ParamFlowRuleController {
             return unsupportedVersion();
         }
         try {
+            //修改读取逻辑
             // 修改位置如下：
 //            return sentinelApiClient.fetchParamFlowRulesOfMachine(app, ip, port)
 //                    .thenApply(repository::saveAll)
@@ -227,6 +228,7 @@ public class ParamFlowRuleController {
         entity.setGmtModified(date);
         try {
             entity = repository.save(entity);
+//            publishRules(entity.getApp(), entity.getIp(), entity.getPort()).get();
             publishRules(entity.getApp());
             return Result.ofSuccess(entity);
         } catch (Exception ex) {
@@ -255,6 +257,7 @@ public class ParamFlowRuleController {
 
         try {
             repository.delete(id);
+//            publishRules(oldEntity.getApp(), oldEntity.getIp(), oldEntity.getPort()).get();
             publishRules(oldEntity.getApp());
             return Result.ofSuccess(id);
         } catch (Exception ex) {
@@ -269,6 +272,7 @@ public class ParamFlowRuleController {
             return Result.ofFail(-1, throwable.getMessage());
         }
     }
+    //修改推送逻辑
     // 1、修改位置如下：
 //    private CompletableFuture<Void> publishRules(String app, String ip, Integer port) {
 //        List<ParamFlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));

@@ -83,6 +83,8 @@ public class SystemController {
             return checkResult;
         }
         try {
+            //修改读取逻辑
+//            List<SystemRuleEntity> rules = sentinelApiClient.fetchSystemRuleOfMachine(app, ip, port);
             String ruleStr = ruleProvider.getRules(RuleNacosConstants.SYSTEM_DATA_ID, app);
             List<SystemRuleEntity> rules = new ArrayList<>();
             if (ruleStr != null) {
@@ -171,6 +173,9 @@ public class SystemController {
             logger.error("Add SystemRule error", throwable);
             return Result.ofThrowable(-1, throwable);
         }
+//        if (!publishRules(app, ip, port)) {
+//            logger.warn("Publish system rules fail after rule add");
+//        }
         publishRules(entity.getApp());
         return Result.ofSuccess(entity);
     }
@@ -231,6 +236,9 @@ public class SystemController {
             logger.error("save error:", throwable);
             return Result.ofThrowable(-1, throwable);
         }
+//        if (!publishRules(entity.getApp(), entity.getIp(), entity.getPort())) {
+//            logger.info("publish system rules fail after rule update");
+//        }
         publishRules(entity.getApp());
         return Result.ofSuccess(entity);
     }
@@ -251,10 +259,17 @@ public class SystemController {
             logger.error("delete error:", throwable);
             return Result.ofThrowable(-1, throwable);
         }
+//        if (!publishRules(oldEntity.getApp(), oldEntity.getIp(), oldEntity.getPort())) {
+//            logger.info("publish system rules fail after rule delete");
+//        }
         publishRules(oldEntity.getApp());
         return Result.ofSuccess(id);
     }
-
+//修改推送逻辑
+//    private boolean publishRules(String app, String ip, Integer port) {
+//        List<SystemRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
+//        return sentinelApiClient.setSystemRuleOfMachine(app, ip, port, rules);
+//    }
     private void publishRules(String app) {
         try {
             List<SystemRuleEntity> rules = repository.findAllByApp(app);

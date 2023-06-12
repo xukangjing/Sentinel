@@ -80,6 +80,9 @@ public class GatewayApiController {
         }
 
         try {
+            //修改读取逻辑
+//            List<ApiDefinitionEntity> apis = sentinelApiClient.fetchApis(app, ip, port).get();
+
             String ruleStr = ruleProvider.getRules(RuleNacosConstants.GATEWAY_API_DATA_ID, app);
             List<ApiDefinitionEntity> apis = new ArrayList<>();
             if (ruleStr != null) {
@@ -174,6 +177,9 @@ public class GatewayApiController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishApis(app, ip, port)) {
+//            logger.warn("publish gateway apis fail after add");
+//        }
         publishApi(entity.getApp());
 
         return Result.ofSuccess(entity);
@@ -235,6 +241,9 @@ public class GatewayApiController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishApis(app, entity.getIp(), entity.getPort())) {
+//            logger.warn("publish gateway apis fail after update");
+//        }
         publishApi(entity.getApp());
 
         return Result.ofSuccess(entity);
@@ -260,10 +269,18 @@ public class GatewayApiController {
             return Result.ofThrowable(-1, throwable);
         }
 
+//        if (!publishApis(oldEntity.getApp(), oldEntity.getIp(), oldEntity.getPort())) {
+//            logger.warn("publish gateway apis fail after delete");
+//        }
         publishApi(oldEntity.getApp());
 
         return Result.ofSuccess(id);
     }
+//修改推送逻辑
+//    private boolean publishApis(String app, String ip, Integer port) {
+//        List<ApiDefinitionEntity> apis = repository.findAllByMachine(MachineInfo.of(app, ip, port));
+//        return sentinelApiClient.modifyApis(app, ip, port, apis);
+//    }
 
     private void publishApi(String app) {
         try {

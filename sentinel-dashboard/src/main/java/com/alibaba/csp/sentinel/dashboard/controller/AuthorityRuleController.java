@@ -73,6 +73,8 @@ public class AuthorityRuleController {
             return Result.ofFail(-1, "Invalid parameter: port");
         }
         try {
+            //修改读取逻辑
+//            List<AuthorityRuleEntity> rules = sentinelApiClient.fetchAuthorityRulesOfMachine(app, ip, port);
             String ruleStr = ruleProvider.getRules(RuleNacosConstants.AUTHORITY_DATA_ID, app);
             List<AuthorityRuleEntity> rules = new ArrayList<>();
             if (ruleStr != null) {
@@ -165,6 +167,9 @@ public class AuthorityRuleController {
             logger.error("Failed to save authority rule", throwable);
             return Result.ofThrowable(-1, throwable);
         }
+//        if (!publishRules(entity.getApp(), entity.getIp(), entity.getPort())) {
+//            logger.info("Publish authority rules failed after rule update");
+//        }
         publishRules(entity.getApp());
         return Result.ofSuccess(entity);
     }
@@ -184,10 +189,17 @@ public class AuthorityRuleController {
         } catch (Exception e) {
             return Result.ofFail(-1, e.getMessage());
         }
+//        if (!publishRules(oldEntity.getApp(), oldEntity.getIp(), oldEntity.getPort())) {
+//            logger.error("Publish authority rules failed after rule delete");
+//        }
         publishRules(oldEntity.getApp());
         return Result.ofSuccess(id);
     }
-
+//修改推送逻辑
+//    private boolean publishRules(String app, String ip, Integer port) {
+//        List<AuthorityRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
+//        return sentinelApiClient.setAuthorityRuleOfMachine(app, ip, port, rules);
+//    }
     private void publishRules(String app) {
         try {
             List<AuthorityRuleEntity> rules = repository.findAllByApp(app);
