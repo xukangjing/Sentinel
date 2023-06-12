@@ -26,10 +26,14 @@ public class RuleNacosConfig {
     public ConfigService nacosConfigService() throws Exception {
         Properties properties = new Properties();
 //        properties.put(PropertyKeyConst.SERVER_ADDR, "162.14.115.18:8848");
-        properties.put(PropertyKeyConst.SERVER_ADDR, "http://dev-nacos.api.xiaomi.net:80");
-         properties.put(PropertyKeyConst.NAMESPACE, "eco_soft");
-         properties.put(PropertyKeyConst.USERNAME, "nacos");
-         properties.put(PropertyKeyConst.PASSWORD, "nacos");
+//        properties.put(PropertyKeyConst.SERVER_ADDR, "http://dev-nacos.api.xiaomi.net:80");
+        properties.put(PropertyKeyConst.SERVER_ADDR, "http://cnbj1-nacos.api.xiaomi.net:80");
+//        properties.put(PropertyKeyConst.NAMESPACE, "eco_soft");
+//        properties.put(PropertyKeyConst.USERNAME, "nacos");
+         properties.put(PropertyKeyConst.NAMESPACE, "eco_soft_pre");
+         properties.put(PropertyKeyConst.USERNAME, "eco_soft_pre");
+//         properties.put(PropertyKeyConst.PASSWORD, "nacos");
+         properties.put(PropertyKeyConst.PASSWORD, "51dc2b87-dd44-4556-b85c-d1a5f53aa051");
         return ConfigFactory.createConfigService(properties);
     }
 }
